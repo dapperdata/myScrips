@@ -1,0 +1,23 @@
+#!/bin/bash
+sudo -i
+
+# Add the Jenkins Key to apt-get
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+
+# Now add an entry to the source list. Run:
+echo "deb http://pkg.jenkins-ci.org/debian binary/" | tee -a /etc/apt/sources.list
+
+# Install Java version 8
+add-apt-repository ppa:webupd8team/java -y
+apt-get update
+apt-get install oracle-java8-installer -y
+
+# Now install Jenkins
+apt-get install jenkins –y
+
+# Setup Redirect for Port 80 to 8080. if you’d like to reach Jenkins on the standard HTTP port 80 instead of needing to # type 8080 everytime
+
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+apt-get install iptables-persistent –y
+
+echo "The installation is complete"
