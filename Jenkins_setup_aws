@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo -i
 
 # Add the Jenkins Key to apt-get
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
